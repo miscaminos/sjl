@@ -1,0 +1,95 @@
+<html>
+    <head>
+      <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+      <title>이소정 Calculator</title>
+      <style>
+        table {
+            margin : 10px;
+            border : 1px solid olive;
+            background : darkolivegreen;
+        }
+        thead, tfoot {
+            background : darkolivegreen;
+            color : darkolivegreen;
+            text-align:right;
+        }
+        td, th {
+            border: 1px dotted olive;
+            text-align : center;
+            padding : 2px;
+            height : 20px;
+        }
+        button{
+            background: olive;
+            color:white;
+        }
+        h1{
+            font-family: cursive;
+            color:darkolivegreen;
+        }
+        .operator{
+            color:black;
+        }
+    </style>
+    </head>
+    <body>
+        <h1>Calculator</h1>
+         <table>
+            <thead>
+            <tr>
+               <td colspan="5">
+                  <input type="text" id="display" value="" disabled>
+               </td>
+            </tr>
+            </thead>
+            <tr>
+                <td><button id="number" value="1" onclick="calculate(this)">1</td>
+                <td><button id="number" value="2" onclick="calculate(this)">2</td>
+                <td><button id="number" value="3" onclick="calculate(this)">3</td>
+                <td><button value="+" class="operator" onclick="calculate(this)">+</button></td>
+                <td><button value="." class="operator" onclick="calculate(this)">.</button></td>
+            </tr>
+            <tr>
+                <td><button id="number" value="4" onclick="calculate(this)">4</td>
+                <td><button id="number" value="5" onclick="calculate(this)">5</td>
+                <td><button id="number" value="6" onclick="calculate(this)">6</td>
+                <td><button value="-" class="operator" onclick="calculate(this)">-</button></td>
+                <td><button value="/100" class="operator" onclick="calculate(this)">%</button></td>
+            </tr>
+            <tr>
+                <td><button id="number" value="7" onclick="calculate(this)">7</td>
+                <td><button id="number" value="8" onclick="calculate(this)">8</td>
+                <td><button id="number" value="9" onclick="calculate(this)">9</td>
+                <td><button value="*" class="operator" onclick="calculate(this)">x</button></td>
+                <td><button value="**" class="operator" onclick="calculate(this)">exp</button></td>
+            </tr>
+            <tr>
+                <td colspan=2><button value="AC" class="operator" onclick="calculate(this)">AC</button></td>
+                <td><button id="number" value="0" onclick="calculate(this)">0</td>
+                <td><button value="/" class="operator" onclick="calculate(this)">/</button></td>
+                <td><button value="=" class="operator" onclick="calculate(this)">=</button></td>
+          </tr>
+         </table>
+
+      <script>
+        var input = document.getElementById("display").value;
+        function calculate(selected) {
+            if (selected.value == '=') {
+                if (input != '') {
+                    input = eval(input);
+                    //console.log(input); 확인용
+                }
+            } else if (selected.value == 'AC') {
+                input = '';
+                //console.log(input); 확인용
+            } else {
+                input += selected.value;
+                //console.log(input); 확인용
+            }
+            document.getElementById("display").value=input;
+        }
+      </script>
+   </body>
+
+</html>
+
