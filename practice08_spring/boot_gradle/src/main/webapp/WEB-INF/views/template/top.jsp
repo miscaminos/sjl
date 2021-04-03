@@ -9,7 +9,7 @@
 		<c:set var='str'>안녕하세요  ${sessionScope.id } 님 !</c:set>
 	</c:when>
 	<c:otherwise>
-		<c:set var="str">Let's study python</c:set>
+		<c:set var="str">Let's Study Python</c:set>
 	</c:otherwise>
 </c:choose>
 <!DOCTYPE html> 
@@ -36,7 +36,7 @@
    <div class="col-sm-4">
     <img src="${root}/images/arrow.jpg" class="img-responsive img-thumbnail" alt="forwardWeGo" >
    </div>
-   <div class="col-sm-8"><h1>Homepage</h1><br>
+   <div class="col-sm-8"><h1>Let's Study Python</h1><br>
     
    <p id="grade">${str}</p> 
    
@@ -48,15 +48,15 @@
     <li class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#">Python <span class="caret"></span></a>
       <ul class="dropdown-menu">
-        <li><a href="${root}/list">Python Syntax</a></li>
-        <li><a href="${root}/create">Python library</a></li>
+        <li><a href="${root}/list">Chapters</a></li>
+        <li><a href="${root}/create">Add New</a></li>
       </ul>
     </li> 
     <li class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#">Python 실습 <span class="caret"></span></a>
       <ul class="dropdown-menu">
-        <li><a href="#">basic problems</a></li>
-        <li><a href="#">advanced problems</a></li>                       
+        <li><a href="#">Basic Problems</a></li>
+        <li><a href="#">Advanced Problems</a></li>                       
       </ul>
     </li>
     <c:choose>
