@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.study.portfolio.PortfolioMapper">
+
+  <insert id="create" parameterType="PortfolioVO">
+    INSERT INTO portfolio (portfoliono, portfolio, cdate, visible, seqno)
+    VALUES(#{portfoliono}, #{portfolio}, sysdate, #{visible}, portfolio_seq.nextval)
+  </insert>
+ 
+  <!-- 출력 순서 오름차순 전체 목록 -->
+  <select id="list_seqno_asc" resultType="PortfolioVO">
+    SELECT  portfoliono, portfolio, cdate, visible, seqno
+    FROM portfolio
+    ORDER BY seqno ASC
+  </select>
+  
+  <!-- 수정, id: update, 입력: CategrpVO, 리턴: int -->
+  <update id="update" parameterType="PortfolioVO">
+    UPDATE portfolio
+    SET portfolio=#{portfolio}, visible=#{visible}, seqno=#{seqno}
+    WHERE portfoliono = #{portfoliono}
+  </update>
+  
+  <!-- 삭제 처리, id=delete, 입력: PK, 리턴: 삭제된 갯수 int -->
+  <delete id="delete" parameterType="int">
+    DELETE FROM portfolio
+    WHERE portfoliono=#{portfoliono}
+  </delete>
+ 
+  <!-- 우선순위 상향 up 10 ▷ 1 -->
+  <update id="update_seqno_up" parameterType="int">
+    UPDATE portfolio
+    SET seqno = seqno - 1
+    WHERE portfoliono=#{portfoliono}
+  </update>
+ 
+  <!-- 우선순위 하향 down 1 ▷ 10 --> 
+  <update id="update_seqno_down" parameterType="int">
+    UPDATE portfolio
+    SET seqno = seqno + 1
+    WHERE portfoliono=#{portfoliono}
+  </update>
+ 
+  <!-- Visible 수정, id: update_visible, 입력: CategrpVO, 리턴: int -->
+  <update id="update_visible" parameterType="Map">
+    UPDATE portfolio
+    SET visible=#{visible}
+    WHERE portfoliono = #{portfoliono}
+  </update>
+  
+</mapper>

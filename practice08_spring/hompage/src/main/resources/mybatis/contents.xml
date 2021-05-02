@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.study.contents.ContentsMapper">
+
+  <insert id="create" parameterType="ContentsDTO">
+    INSERT INTO contents (contentsno, title, contents, cdate, visible, seqno)
+    VALUES(#{contentsno}, #{title}, #{contents}, sysdate, #{visible}, contents_seq.nextval)
+  </insert>
+ 
+  <!-- 출력 순서 오름차순 전체 목록 -->
+  <select id="list_seqno_asc" resultType="ContentsDTO">
+    SELECT  contentsno, title, contents, cdate, visible, seqno
+    FROM contents
+    ORDER BY seqno ASC
+  </select>
+  
+  <!-- 수정, id: update, 입력: CategrpVO, 리턴: int -->
+  <update id="update" parameterType="ContentsDTO">
+    UPDATE contents
+    SET title = #{title}, contents=#{contents}, visible=#{visible}, seqno=#{seqno}
+    WHERE contentsno = #{contentsno}
+  </update>
+  
+  <!-- 삭제 처리, id=delete, 입력: PK, 리턴: 삭제된 갯수 int -->
+  <delete id="delete" parameterType="int">
+    DELETE FROM contents
+    WHERE contentsno=#{contentsno}
+  </delete>
+  
+  <!-- contentsno로 1개 조회 -->
+  <select id="read" resultType="ContentsDTO">
+    SELECT  contentsno, title, contents, cdate, visible, seqno
+    FROM contents
+    WHERE contentsno = #{contentsno}
+  </select>
+  
+  <!-- contentsno로 1개 조회 -->
+  <select id="getByTitle" resultType="ContentsDTO">
+    SELECT  contentsno, title, contents, cdate, visible, seqno
+    FROM contents
+    WHERE title like '%#{title}%'
+  </select>
+  
+  <!-- 삭제 처리, id=delete -->
+  <delete id="deleteAll" parameterType="int">
+    DELETE FROM contents
+    WHERE contentsno > 0
+  </delete>
+ <!-- 여기까지 mapping 사용 -->
+ 
+ 
+ 
+  <!-- 우선순위 상향 up 10 ▷ 1 -->
+  <update id="update_seqno_up" parameterType="int">
+    UPDATE contents
+    SET seqno = seqno - 1
+    WHERE contentsno=#{contentsno}
+  </update>
+ 
+  <!-- 우선순위 하향 down 1 ▷ 10 --> 
+  <update id="update_seqno_down" parameterType="int">
+    UPDATE contents
+    SET seqno = seqno + 1
+    WHERE contentsno=#{contentsno}
+  </update>
+ 
+  <!-- Visible 수정, id: update_visible, 입력: CategrpVO, 리턴: int -->
+  <update id="update_visible" parameterType="Map">
+    UPDATE contents
+    SET visible=#{visible}
+    WHERE contentsno = #{contentsno}
+  </update>
+  
+</mapper>
